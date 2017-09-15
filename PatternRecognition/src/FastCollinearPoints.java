@@ -23,8 +23,8 @@ public class FastCollinearPoints {
         int N = points.length;
         double[] slope = new double[N - 1];
         int count = 0;
-        for (int i = 0; i < 1; i++) {
-            Arrays.sort(points, points[0].slopeOrder());
+        Arrays.sort(points, points[0].slopeOrder());
+        for (int i = 0; i < N; i++) {
 
         }
         return count;
@@ -41,5 +41,6 @@ public class FastCollinearPoints {
         }
         FastCollinearPoints fastCollinearPoints = new FastCollinearPoints(points);
         fastCollinearPoints.numberOfSegments();
+        System.out.println("----------------");
     }
 }

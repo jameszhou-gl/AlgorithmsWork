@@ -24,30 +24,36 @@ public class Point implements Comparable<Point> {
         return "( " + x + "," + y + " )";
     }
 
-    public int compareTo(Point that) {
-        if (that.y < this.y) return 1;
-        else if (that.y == this.y && that.x < this.x) return 1;
+    public int compareTo(Point that) {//x.compareTo(y)，ifx<y,return -1;
+        if (this.y < that.y) return 1;
+        else if (this.y == that.y && this.x < that.x) return 1;
+        else if (this.y == that.y && this.x == that.x) return 0;
         else return -1;
     }
 
     public double slopeTo(Point that) {//x.slopeTo(y),求得x->y的斜率
         int deltay = that.y - this.y;
         int deltax = that.x - this.x;
-        if (deltay == 0 && deltax == 0) return Double.MIN_VALUE;
-        else if (deltax == 0) return Double.MAX_VALUE;
+        if (deltay == 0 && deltax == 0) return Double.NEGATIVE_INFINITY;
+        else if (deltax == 0) return Double.POSITIVE_INFINITY;
         else if (deltay == 0) return 0.0;
         else return (double) deltay / deltax;
     }
 
     public Comparator<Point> slopeOrder() {
-        Comparator<Point> comparator = new Comparator<Point>() {
-            @Override
-            public int compare(Point o1, Point o2) {
-                return (int) (slopeTo(o1) - slopeTo(o2));
-            }
-        };
-        return comparator;
-
+        return new SlopeOrder();
+    }
+    private class SlopeOrder implements Comparator<Point> {
+        @Override
+        public int compare(Point o1, Point o2) {
+            double slope1=slopeTo(o1);
+            double slope2=slopeTo(o2);
+            if (slope1<slope2)
+                return -1;
+            else if (slope1>slope2)
+                return 1;
+            else return 0;
+        }
     }
 
     public static void main(String[] args) {
