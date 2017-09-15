@@ -40,11 +40,6 @@ public class FastCollinearPoints {
             points[i] = new Point(x, y);
         }
         FastCollinearPoints fastCollinearPoints = new FastCollinearPoints(points);
-
-        BruteCollinearPoints bruteCollinearPoints = new BruteCollinearPoints(points);
         fastCollinearPoints.numberOfSegments();
-//        for (LineSegment segment:fastCollinearPoints.segments()){
-//            StdOut.println(segment);
-//        }
     }
 }
